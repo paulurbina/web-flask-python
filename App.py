@@ -39,7 +39,9 @@ def get_contact(id):
     cur = mysql.get_db().cursor()
     cur.execute('SELECT * FROM contacts WHERE id = %s', (id))
     data = cur.fetchall()
+    cur.close()
     return render_template('edit-contact.html', contact = data[0])
+
 
 @app.route('/update/<id>', methods = ['POST'])
 def update_contact(id):
@@ -50,18 +52,17 @@ def update_contact(id):
         cur = mysql.get_db().cursor()
         cur.execute("""
             UPDATE contacts
-            SET fullname = %s,
-                email = %s,
-                phone = %s,
-            WHERE  id = %s
-        """, (fullname, phone, email, id))
+            SET fullname=%s,
+                phone=%s,
+                email=%s,
+            WHERE id=%s
+        """,(fullname, phone, email, id))
         mysql.get_db().commit()
         flash('Contact Update Successfully')
         return redirect(url_for('Index'))
 
 
-
-@app.route('/delete/<string:id>')
+@app.route('/delete/<string:id>', methods=['POST', 'GET'])
 def delete_contact(id):
     cur = mysql.get_db().cursor()
     cur.execute('DELETE FROM contacts WHERE id = {0}'.format(id))
@@ -70,4 +71,4 @@ def delete_contact(id):
     return redirect(url_for('Index'))
 
 if __name__ == '__main__':
-    app.run(port=3000, debug=True) 
+    app.run(port=5000, debug=True) 

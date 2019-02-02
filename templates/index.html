@@ -46,9 +46,11 @@
         <div class="column">
             <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                 <thead>
+                    <th>ID</th>
                     <th>FullName</th>
                     <th>Phone</th>
-                    <th>Opctions</th>
+                    <th>Email</th>
+                    <th>Options</th>
                 </thead>
                 <tbody>
                     {% for contact in contacts %}
@@ -58,8 +60,8 @@
                         <td>{{contact.2}}</td>
                         <td>{{contact.3}}</td>
                         <td>
-                            <a href="/edit/{{contact.0}}" class="button is-warning">Edit</a>
-                            <a href="/delete/{{contact.0}}" class="button is-danger">Delete</a>
+                            <a href="/edit/{{contact.0}}" class="button is-warning"><i class="fas fa-pen-square"></i></a>
+                            <a href="/delete/{{contact.0}}" class="button is-danger"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                     {% endfor %}
