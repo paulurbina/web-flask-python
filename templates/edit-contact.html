@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="container p-5">
+    <div class="columns">
+        <div class="column is-two-fifths is-offset-4">
+                <form action="/update/{{contact.0}}" method="POST">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-primary" name="fullname" value="{{contact.1}}" type="text" placeholder="Full Name">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-primary" name="phone" value="{{contact.2}}" type="number" placeholder="Phone">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-primary" name="email" value="{{contact.3}}" type="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button type="submit" class="button is-link">Update</button>
+                        </div>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

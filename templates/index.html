@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="container">
+
+    <div class="columns">
+        <div class="column is-two-fifths">
+            <form action="{{ url_for('add_contact') }}" method="POST">
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-primary" name="fullname" type="text" placeholder="Full Name">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-primary" name="phone" type="number" placeholder="Phone">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-primary" name="email" type="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button type="submit" class="button is-link">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="column">
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <thead>
+                    <th>FullName</th>
+                    <th>Phone</th>
+                    <th>Opctions</th>
+                </thead>
+                <tbody>
+                    {% for contact in contacts %}
+                    <tr>
+                        <td>{{contact.0}}</td>
+                        <td>{{contact.1}}</td>
+                        <td>{{contact.2}}</td>
+                        <td>{{contact.3}}</td>
+                        <td>
+                            <a href="/edit/{{contact.0}}" class="button is-warning">Edit</a>
+                            <a href="/delete/{{contact.0}}" class="button is-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}
